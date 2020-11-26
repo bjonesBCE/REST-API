@@ -15,10 +15,6 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.secret_key = 'blah'
 api = Api(app)
 
-@app.before_first_request
-def create_tables():
-    db.create_all()
-
 app.config['JWT_AUTH_URL_RULE'] = '/login'  # changes /auth to /login
 jwt = JWT(app, authenticate, identity) # /auth --> now /login
 app.config['JWT_EXPIRATION_DELTA'] = timedelta(seconds=1800)  # sets token expiration to 5 minutes
